@@ -1,19 +1,32 @@
 <script>
-	export let name;
+	import { Canvas, Layer, t } from "svelte-canvas"
+	import Button from "./Button.svelte"
+
+	$: render = ({ context, width, height }) => {
+		context.beginPath()
+		context.moveTo(50, 100)
+		context.lineTo(200, 100)
+		context.lineTo(100, 25)
+		context.fillStyle = `green`;
+		context.fill();
+	};
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<Canvas style="background-color:LightGray" width={400} height={400}>
+	<Layer {render} />
+	Generative Art
+</Canvas>
+
+<h1>Generative Art</h1>
+<Button buttonType="primary">Randomize</Button>
+<!-- <Button buttonType="secondary">Secondary</Button>
+<Button buttonType="primary" inverse={true}>Inverse Primary</Button>
+<Button buttonType="secondary" inverse={true}>Inverse Secondary</Button>
+<Button flat={true}>Flat</Button>
+<Button disabled={true}>Disabled</Button> -->
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+	@import 'https://unpkg.com/@responsive-ui/button@latest/lib/index.css';
 
 	h1 {
 		color: #ff3e00;
@@ -22,9 +35,7 @@
 		font-weight: 100;
 	}
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+	body {
+		background-color: darkgrey;
 	}
 </style>
